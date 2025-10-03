@@ -8,11 +8,12 @@
 import SwiftUI
 enum ReminderCellEvents {
     case onInfo
-    case onCheckChange(Reminder)
+    case onCheckChange(Reminder,Bool)
     case onSelect(Reminder)
 }
 struct ReminderCellView: View {
     let reminder: Reminder
+    let delay = Delay()
     @State private var checked: Bool = false
     let onEvent:(ReminderCellEvents) -> Void
     private func formatDate(_ date: Date) -> String {
@@ -28,7 +29,10 @@ struct ReminderCellView: View {
                 .opacity(0.4)
                 .onTapGesture {
                     checked.toggle()
-                    onEvent(.onCheckChange(reminder))
+                    delay.cancel()
+                    delay.performWork {
+                        onEvent(.onCheckChange(reminder,checked))
+                    }
                 }
             VStack(alignment: .leading) {
                 Text(reminder.title ?? "")

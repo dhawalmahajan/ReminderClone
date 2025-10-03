@@ -29,6 +29,7 @@
 		0297F2952E8FDAA200A81BCF /* ReminderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0297F28B2E8FDAA200A81BCF /* ReminderDetailView.swift */; };
 		0297F2962E8FDAA200A81BCF /* ReminderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0297F28C2E8FDAA200A81BCF /* ReminderListView.swift */; };
 		0297F2982E8FDAB600A81BCF /* SelectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0297F2972E8FDAB600A81BCF /* SelectListView.swift */; };
+		0297F29A2E90076500A81BCF /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0297F2992E90076100A81BCF /* Delay.swift */; };
 		02A058BD2E65C12C003042DF /* ReminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A058BC2E65C12C003042DF /* ReminderService.swift */; };
 		02A058C02E65C2D0003042DF /* UIColorTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A058BF2E65C2D0003042DF /* UIColorTransformer.swift */; };
 		02AEF0112E64772900BD8EF0 /* MyList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEF00F2E64772900BD8EF0 /* MyList+CoreDataClass.swift */; };
@@ -78,6 +79,7 @@
 		0297F28B2E8FDAA200A81BCF /* ReminderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailView.swift; sourceTree = "<group>"; };
 		0297F28C2E8FDAA200A81BCF /* ReminderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListView.swift; sourceTree = "<group>"; };
 		0297F2972E8FDAB600A81BCF /* SelectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectListView.swift; sourceTree = "<group>"; };
+		0297F2992E90076100A81BCF /* Delay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		02A058BC2E65C12C003042DF /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		02A058BF2E65C2D0003042DF /* UIColorTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorTransformer.swift; sourceTree = "<group>"; };
 		02AEF00F2E64772900BD8EF0 /* MyList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyList+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		0297F25A2E8FBF1400A81BCF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0297F2992E90076100A81BCF /* Delay.swift */,
 				0297F25B2E8FBF2900A81BCF /* CustomOperators.swift */,
 			);
 			path = Utils;
@@ -370,6 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0297F29A2E90076500A81BCF /* Delay.swift in Sources */,
 				0283F67B2E6440E90061336C /* ReminderClone.xcdatamodeld in Sources */,
 				0297F2592E8FB5A100A81BCF /* ReminderEditConfig.swift in Sources */,
 				02AEF0112E64772900BD8EF0 /* MyList+CoreDataClass.swift in Sources */,

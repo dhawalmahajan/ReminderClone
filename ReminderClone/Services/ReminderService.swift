@@ -35,4 +35,14 @@ class ReminderService {
         request.predicate = NSPredicate(format: "list = %@ AND isCompleted = false ", myList)
         return request
     }
+    static func updateReminder(reminder: Reminder, editConfig: ReminderEditConfig) throws -> Bool{
+        let reminderToUpdate = reminder
+        reminderToUpdate.isCompleted = editConfig.isCompleted
+        reminderToUpdate.title = editConfig.title
+        reminderToUpdate.notes = editConfig.notes
+        reminderToUpdate.reminderDate = editConfig.hasDate ? editConfig.reminderDate : nil
+        reminderToUpdate.reminderTime = editConfig.hasTime ? editConfig.reminderTime : nil
+        try save()
+        return true
+    }
 }

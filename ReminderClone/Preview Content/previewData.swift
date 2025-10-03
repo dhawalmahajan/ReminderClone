@@ -12,4 +12,9 @@ class PreviewData {
         return (try? context.fetch(request).first) ?? MyList()
         
     }
+    static var reminder: Reminder {
+        let context = CoreDataProvider.shared.persistentContainer.viewContext
+        let request = Reminder.fetchRequest()
+        return (try? context.fetch(request).first) ?? Reminder(context: context )
+    }
 }

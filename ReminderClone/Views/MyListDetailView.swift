@@ -11,19 +11,19 @@ struct MyListDetailView: View {
     let myList: MyList
     @State private var openAddReminderSheet: Bool = false
     @State private var title: String = ""
-    @FetchRequest(sortDescriptors: [])
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Reminder.title, ascending: true)])
     private var reminderResults:FetchedResults<Reminder>
     private var isFormValid: Bool {
         return !title.isEmpty
     }
     init(myList: MyList) {
         self.myList = myList
-        _reminderResults = FetchRequest(fetchRequest: Reminder.fetchRequest())
+        _reminderResults = FetchRequest(fetchRequest: ReminderService.getRemindersByList(myList: myList))
     }
     var body: some View {
         VStack {
             //Display list of reminders
-           
+           ReminderListView(reminders: reminderResults)
             HStack {
                 Image(systemName: "plus.circle.fill")
                 Button("New Reminder") {

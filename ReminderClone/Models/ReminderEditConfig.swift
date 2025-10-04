@@ -22,6 +22,6 @@ struct ReminderEditConfig {
         self.hasTime = reminder.reminderTime != nil
         self.hasDate = reminder.reminderDate != nil
         self.reminderDate = reminder.reminderDate
-        self.reminderTime = reminder.reminderTime
+        self.reminderTime = reminder.reminderTime 
     }
 }

@@ -8,22 +8,39 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var isPresented: Bool = false
     @FetchRequest(sortDescriptors: [])
     private var myListResults: FetchedResults<MyList>
+    @FetchRequest(sortDescriptors: [])
+    private var searchResult: FetchedResults<Reminder>
+    
+    
+    @State private var isPresented: Bool = false
+    @State private var search: String = ""
+    @State private var searching: Bool = false
+    
     var body: some View {
         NavigationStack {
             VStack {
-               MyListView(myList: myListResults)
-//                Spacer()
-                Button {
-                    isPresented = true
-                } label: {
-                    Text("Add list")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .font(.headline)
-                }.padding()
-            }.sheet(isPresented: $isPresented) {
+                ScrollView {
+                    MyListView(myList: myListResults)
+                    Button {
+                        isPresented = true
+                    } label: {
+                        Text("Add list")
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .font(.headline)
+                    }.padding()
+                }
+            }
+            .onChange(of: search, perform: { searchTerm in
+                searching = !searchTerm.isEmpty ? true : false
+                searchResult.nsPredicate = ReminderService.getRemindersBySearchTerm(search).predicate
+            })
+            .overlay(alignment: .center, content: {
+                ReminderListView(reminders: searchResult)
+                    .opacity(searching ? 1.0 : 0.0)
+            })
+            .sheet(isPresented: $isPresented) {
                 NavigationView {
                     AddNewListView { name, color in
                         //save list to db
@@ -37,7 +54,9 @@ struct HomeView: View {
                     
                 }
             }
-        }.padding()
+            .padding()
+        }
+        .searchable(text: $search)
     }
 }
 

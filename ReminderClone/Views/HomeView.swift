@@ -14,24 +14,54 @@ struct HomeView: View {
     private var searchResult: FetchedResults<Reminder>
     
     
+    @FetchRequest(fetchRequest: ReminderService.reminderByStatType(.today))
+    private var todayResult: FetchedResults<Reminder>
+    @FetchRequest(fetchRequest: ReminderService.reminderByStatType(.scheduled))
+    private var scheduledResult: FetchedResults<Reminder>
+    @FetchRequest(fetchRequest: ReminderService.reminderByStatType(.all))
+    private var allResult: FetchedResults<Reminder>
+    @FetchRequest(fetchRequest: ReminderService.reminderByStatType(.complete))
+    private var completedResult: FetchedResults<Reminder>
+    
+    
     @State private var isPresented: Bool = false
     @State private var search: String = ""
     @State private var searching: Bool = false
     private var reminderStatBuilder = ReminderStatsBuilder()
     @State private var reminderStatValues: ReminderStatsValues = ReminderStatsValues()
+   
     
     var body: some View {
         NavigationStack {
             VStack {
                 ScrollView {
-                   
                     HStack {
-                        ReminderStatView(icon: "calendar.badge.plus", title: "Today", count: reminderStatValues.todayCount)
-                        ReminderStatView(icon: "tray.circle.fill", title: "All", count: reminderStatValues.allCount)
+                        NavigationLink {
+                            ReminderListView(reminders: todayResult)
+                        } label: {
+                            ReminderStatView(icon: "calendar.badge.plus", title: "Today", count: reminderStatValues.todayCount)
+                        }
+                        NavigationLink {
+                            ReminderListView(reminders: scheduledResult)
+                        } label: {
+                            
+                            ReminderStatView(icon: "tray.circle.fill", title: "Scheduled", count: reminderStatValues.scheduledCount,iconColor: .red)
+                        }
+                       
                     }
                     HStack {
-                        ReminderStatView(icon: "calendar.circle.fill", title: "Scheduled", count: reminderStatValues.scheduledCount)
-                        ReminderStatView(icon: "checkmark.circle.fill", title: "Completed", count: reminderStatValues.completedCount)
+                        NavigationLink {
+                            ReminderListView(reminders: allResult)
+                        } label: {
+                            ReminderStatView(icon: "calendar.circle.fill", title: "All", count: reminderStatValues.allCount,iconColor: .secondary)
+                        }
+                        NavigationLink {
+                            ReminderListView(reminders: completedResult)
+                        } label: {
+                            ReminderStatView(icon: "checkmark.circle.fill", title: "Completed", count: reminderStatValues.completedCount,iconColor: .primary)
+                        }
+                       
+                       
                     }
                     Text("My List")
                         .frame(maxWidth: .infinity, alignment: .leading)

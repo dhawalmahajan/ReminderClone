@@ -5,17 +5,33 @@
 //  Created by Dhawal Mahajan on 11/09/25.
 //
 
+
 import SwiftUI
+
+class MyListDetailViewModel: ObservableObject {
+    @Published var openAddReminderSheet: Bool = false
+    @Published var title: String = ""
+    
+    var isFormValid: Bool {
+        !title.isEmpty
+    }
+    
+    func saveReminder(to myList: MyList) {
+        guard isFormValid else { return }
+        do {
+            try ReminderService.saveReminderToMyList(myList: myList, title: title)
+            title = ""
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
 
 struct MyListDetailView: View {
     let myList: MyList
-    @State private var openAddReminderSheet: Bool = false
-    @State private var title: String = ""
+    @StateObject private var viewModel = MyListDetailViewModel()
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Reminder.title, ascending: true)])
     private var reminderResults:FetchedResults<Reminder>
-    private var isFormValid: Bool {
-        return !title.isEmpty
-    }
     init(myList: MyList) {
         self.myList = myList
         _reminderResults = FetchRequest(fetchRequest: ReminderService.getRemindersByList(myList: myList))
@@ -27,24 +43,18 @@ struct MyListDetailView: View {
             HStack {
                 Image(systemName: "plus.circle.fill")
                 Button("New Reminder") {
-                    openAddReminderSheet = true
+                    viewModel.openAddReminderSheet = true
                 }
             }
             .foregroundColor(.blue)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
-        }.alert("New Reminder", isPresented: $openAddReminderSheet) {
-            TextField("", text: $title)
+        }.alert("New Reminder", isPresented: $viewModel.openAddReminderSheet) {
+            TextField("", text: $viewModel.title)
             Button("Cancel", role: .cancel) {}
             Button("Done") {
-                if(isFormValid) {
-                    do {
-                        try ReminderService.saveReminderToMyList(myList: myList, title: title)
-                    } catch  {
-                        print(error.localizedDescription)
-                    }
-                }
-            }.disabled(!isFormValid)
+                viewModel.saveReminder(to: myList)
+            }.disabled(!viewModel.isFormValid)
         }
     }
 }

@@ -78,6 +78,8 @@ struct HomeView: View {
                     }.padding()
                 }
             }
+            .navigationTitle("Reminders")
+            .navigationBarTitleDisplayMode(.large)
             .sheet(isPresented: $isPresented) {
                 NavigationView {
                     AddNewListView { name, color in

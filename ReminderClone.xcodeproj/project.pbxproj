@@ -35,6 +35,7 @@
 		02AC74172E9145380036C849 /* ReminderStatsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC74162E91452F0036C849 /* ReminderStatsBuilder.swift */; };
 		02AC74192E9152100036C849 /* ReminderStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC74182E9152100036C849 /* ReminderStatView.swift */; };
 		02AEDAE82E9236300013D9DD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEDAE72E92362B0013D9DD /* NotificationManager.swift */; };
+		02AEDAEB2E923CC70013D9DD /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEDAEA2E923CC70013D9DD /* Color+Extension.swift */; };
 		02AEF0112E64772900BD8EF0 /* MyList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEF00F2E64772900BD8EF0 /* MyList+CoreDataClass.swift */; };
 		02AEF0122E64772900BD8EF0 /* MyList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEF0102E64772900BD8EF0 /* MyList+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		02AC74162E91452F0036C849 /* ReminderStatsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderStatsBuilder.swift; sourceTree = "<group>"; };
 		02AC74182E9152100036C849 /* ReminderStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderStatView.swift; sourceTree = "<group>"; };
 		02AEDAE72E92362B0013D9DD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		02AEDAEA2E923CC70013D9DD /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		02AEF00F2E64772900BD8EF0 /* MyList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		02AEF0102E64772900BD8EF0 /* MyList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				0297F2542E8FAB2000A81BCF /* Date+Extension.swift */,
+				02AEDAEA2E923CC70013D9DD /* Color+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				0297F2952E8FDAA200A81BCF /* ReminderDetailView.swift in Sources */,
 				0297F2962E8FDAA200A81BCF /* ReminderListView.swift in Sources */,
 				02A058BD2E65C12C003042DF /* ReminderService.swift in Sources */,
+				02AEDAEB2E923CC70013D9DD /* Color+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

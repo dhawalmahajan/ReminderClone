@@ -36,6 +36,11 @@
 		02AC74192E9152100036C849 /* ReminderStatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC74182E9152100036C849 /* ReminderStatView.swift */; };
 		02AEDAE82E9236300013D9DD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEDAE72E92362B0013D9DD /* NotificationManager.swift */; };
 		02AEDAEB2E923CC70013D9DD /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEDAEA2E923CC70013D9DD /* Color+Extension.swift */; };
+		02AEDAEE2E9248A40013D9DD /* ReminderDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEDAED2E9248A40013D9DD /* ReminderDetailViewModel.swift */; };
+		02AEDAF02E9249080013D9DD /* AddNewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEDAEF2E9249080013D9DD /* AddNewListViewModel.swift */; };
+		02AEDAF22E9249320013D9DD /* MyListDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEDAF12E92492F0013D9DD /* MyListDetailViewModel.swift */; };
+		02AEDAF42E9249690013D9DD /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEDAF32E9249670013D9DD /* ReminderListViewModel.swift */; };
+		02AEDAF62E9249AC0013D9DD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEDAF52E9249AA0013D9DD /* HomeViewModel.swift */; };
 		02AEF0112E64772900BD8EF0 /* MyList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEF00F2E64772900BD8EF0 /* MyList+CoreDataClass.swift */; };
 		02AEF0122E64772900BD8EF0 /* MyList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AEF0102E64772900BD8EF0 /* MyList+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
@@ -90,6 +95,11 @@
 		02AC74182E9152100036C849 /* ReminderStatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderStatView.swift; sourceTree = "<group>"; };
 		02AEDAE72E92362B0013D9DD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		02AEDAEA2E923CC70013D9DD /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		02AEDAED2E9248A40013D9DD /* ReminderDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewModel.swift; sourceTree = "<group>"; };
+		02AEDAEF2E9249080013D9DD /* AddNewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewListViewModel.swift; sourceTree = "<group>"; };
+		02AEDAF12E92492F0013D9DD /* MyListDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListDetailViewModel.swift; sourceTree = "<group>"; };
+		02AEDAF32E9249670013D9DD /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
+		02AEDAF52E9249AA0013D9DD /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02AEF00F2E64772900BD8EF0 /* MyList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		02AEF0102E64772900BD8EF0 /* MyList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +152,7 @@
 		0283F66D2E6440E70061336C /* ReminderClone */ = {
 			isa = PBXGroup;
 			children = (
+				02AEDAEC2E9248830013D9DD /* Viewmodels */,
 				02AEDAE92E9236420013D9DD /* Manager */,
 				0297F28D2E8FDAA200A81BCF /* Views */,
 				0297F25A2E8FBF1400A81BCF /* Utils */,
@@ -250,6 +261,18 @@
 				02AEDAE72E92362B0013D9DD /* NotificationManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		02AEDAEC2E9248830013D9DD /* Viewmodels */ = {
+			isa = PBXGroup;
+			children = (
+				02AEDAF52E9249AA0013D9DD /* HomeViewModel.swift */,
+				02AEDAF32E9249670013D9DD /* ReminderListViewModel.swift */,
+				02AEDAF12E92492F0013D9DD /* MyListDetailViewModel.swift */,
+				02AEDAED2E9248A40013D9DD /* ReminderDetailViewModel.swift */,
+				02AEDAEF2E9249080013D9DD /* AddNewListViewModel.swift */,
+			);
+			path = Viewmodels;
 			sourceTree = "<group>";
 		};
 		02AEF00E2E6476D200BD8EF0 /* Models */ = {
@@ -400,13 +423,17 @@
 				02A058C02E65C2D0003042DF /* UIColorTransformer.swift in Sources */,
 				02AEF0122E64772900BD8EF0 /* MyList+CoreDataProperties.swift in Sources */,
 				02AEDAE82E9236300013D9DD /* NotificationManager.swift in Sources */,
+				02AEDAF22E9249320013D9DD /* MyListDetailViewModel.swift in Sources */,
 				02AC74192E9152100036C849 /* ReminderStatView.swift in Sources */,
 				0297F25C2E8FBF3000A81BCF /* CustomOperators.swift in Sources */,
 				0297F2552E8FAB2600A81BCF /* Date+Extension.swift in Sources */,
 				0283F66F2E6440E70061336C /* ReminderCloneApp.swift in Sources */,
+				02AEDAF42E9249690013D9DD /* ReminderListViewModel.swift in Sources */,
 				0283F69F2E6441740061336C /* CoreDataProvider.swift in Sources */,
 				025A115F2E72E4EE002FFBFA /* previewData.swift in Sources */,
+				02AEDAEE2E9248A40013D9DD /* ReminderDetailViewModel.swift in Sources */,
 				0297F28E2E8FDAA200A81BCF /* AddNewListView.swift in Sources */,
+				02AEDAF02E9249080013D9DD /* AddNewListViewModel.swift in Sources */,
 				0297F28F2E8FDAA200A81BCF /* ColorPickerView.swift in Sources */,
 				0297F2902E8FDAA200A81BCF /* HomeView.swift in Sources */,
 				0297F2912E8FDAA200A81BCF /* MyListCellView.swift in Sources */,
@@ -418,6 +445,7 @@
 				0297F2952E8FDAA200A81BCF /* ReminderDetailView.swift in Sources */,
 				0297F2962E8FDAA200A81BCF /* ReminderListView.swift in Sources */,
 				02A058BD2E65C12C003042DF /* ReminderService.swift in Sources */,
+				02AEDAF62E9249AC0013D9DD /* HomeViewModel.swift in Sources */,
 				02AEDAEB2E923CC70013D9DD /* Color+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

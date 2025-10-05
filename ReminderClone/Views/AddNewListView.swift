@@ -7,14 +7,7 @@
 
 import SwiftUI
 
-class AddNewListViewModel: ObservableObject {
-    @Published var name: String = ""
-    @Published var selectedColor: Color = .yellow
-    
-    var isFormValid: Bool {
-        !name.isEmpty
-    }
-}
+
 
 struct AddNewListView: View {
     @Environment(\.dismiss) private var dismiss

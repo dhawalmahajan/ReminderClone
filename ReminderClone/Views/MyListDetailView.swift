@@ -8,24 +8,6 @@
 
 import SwiftUI
 
-class MyListDetailViewModel: ObservableObject {
-    @Published var openAddReminderSheet: Bool = false
-    @Published var title: String = ""
-    
-    var isFormValid: Bool {
-        !title.isEmpty
-    }
-    
-    func saveReminder(to myList: MyList) {
-        guard isFormValid else { return }
-        do {
-            try ReminderService.saveReminderToMyList(myList: myList, title: title)
-            title = ""
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-}
 
 struct MyListDetailView: View {
     let myList: MyList

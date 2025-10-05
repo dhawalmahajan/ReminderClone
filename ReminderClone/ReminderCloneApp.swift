@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
-
+import UserNotifications
 @main
 struct ReminderCloneApp: App {
     
-
+    init() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            
+        }
+    }
     var body: some Scene {
         WindowGroup {
             HomeView()

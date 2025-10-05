@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+class HomeViewModel: ObservableObject {
+    @Published var isPresented: Bool = false
+    @Published var search: String = ""
+    @Published var searching: Bool = false
+    private var reminderStatBuilder = ReminderStatsBuilder()
+    @Published var reminderStatValues: ReminderStatsValues = ReminderStatsValues()
+    
+    func updateStats(from myListResults: FetchedResults<MyList>) {
+        reminderStatValues = reminderStatBuilder.build(myListResult: myListResults)
+    }
+}
+
 struct HomeView: View {
     @FetchRequest(sortDescriptors: [])
     private var myListResults: FetchedResults<MyList>
@@ -23,12 +35,7 @@ struct HomeView: View {
     @FetchRequest(fetchRequest: ReminderService.reminderByStatType(.complete))
     private var completedResult: FetchedResults<Reminder>
     
-    
-    @State private var isPresented: Bool = false
-    @State private var search: String = ""
-    @State private var searching: Bool = false
-    private var reminderStatBuilder = ReminderStatsBuilder()
-    @State private var reminderStatValues: ReminderStatsValues = ReminderStatsValues()
+    @StateObject private var viewModel = HomeViewModel()
    
     
     var body: some View {
@@ -39,13 +46,13 @@ struct HomeView: View {
                         NavigationLink {
                             ReminderListView(reminders: todayResult)
                         } label: {
-                            ReminderStatView(icon: "calendar.badge.plus", title: "Today", count: reminderStatValues.todayCount)
+                            ReminderStatView(icon: "calendar.badge.plus", title: "Today", count: viewModel.reminderStatValues.todayCount)
                         }
                         NavigationLink {
                             ReminderListView(reminders: scheduledResult)
                         } label: {
                             
-                            ReminderStatView(icon: "tray.circle.fill", title: "Scheduled", count: reminderStatValues.scheduledCount,iconColor: .red)
+                            ReminderStatView(icon: "tray.circle.fill", title: "Scheduled", count: viewModel.reminderStatValues.scheduledCount,iconColor: .red)
                         }
                        
                     }
@@ -53,12 +60,12 @@ struct HomeView: View {
                         NavigationLink {
                             ReminderListView(reminders: allResult)
                         } label: {
-                            ReminderStatView(icon: "calendar.circle.fill", title: "All", count: reminderStatValues.allCount,iconColor: .secondary)
+                            ReminderStatView(icon: "calendar.circle.fill", title: "All", count: viewModel.reminderStatValues.allCount,iconColor: .secondary)
                         }
                         NavigationLink {
                             ReminderListView(reminders: completedResult)
                         } label: {
-                            ReminderStatView(icon: "checkmark.circle.fill", title: "Completed", count: reminderStatValues.completedCount,iconColor: .primary)
+                            ReminderStatView(icon: "checkmark.circle.fill", title: "Completed", count: viewModel.reminderStatValues.completedCount,iconColor: .primary)
                         }
                        
                        
@@ -70,7 +77,7 @@ struct HomeView: View {
                         .padding()
                     MyListView(myList: myListResults)
                     Button {
-                        isPresented = true
+                        viewModel.isPresented = true
                     } label: {
                         Text("Add list")
                             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -80,7 +87,7 @@ struct HomeView: View {
             }
             .navigationTitle("Reminders")
             .navigationBarTitleDisplayMode(.large)
-            .sheet(isPresented: $isPresented) {
+            .sheet(isPresented: $viewModel.isPresented) {
                 NavigationView {
                     AddNewListView { name, color in
                         //save list to db
@@ -94,21 +101,21 @@ struct HomeView: View {
                     
                 }
             }
-            .onChange(of: search, perform: { searchTerm in
-                searching = !searchTerm.isEmpty ? true : false
-                searchResult.nsPredicate = ReminderService.getRemindersBySearchTerm(search).predicate
+            .onChange(of: viewModel.search, perform: { searchTerm in
+                viewModel.searching = !searchTerm.isEmpty ? true : false
+                searchResult.nsPredicate = ReminderService.getRemindersBySearchTerm(viewModel.search).predicate
             })
             .overlay(alignment: .center, content: {
                 ReminderListView(reminders: searchResult)
-                    .opacity(searching ? 1.0 : 0.0)
+                    .opacity(viewModel.searching ? 1.0 : 0.0)
             })
             .onAppear {
-                reminderStatValues = reminderStatBuilder.build(myListResult: myListResults)
+                viewModel.updateStats(from: myListResults)
             }
             
             .padding()
         }
-        .searchable(text: $search)
+        .searchable(text: $viewModel.search)
     }
 }
 

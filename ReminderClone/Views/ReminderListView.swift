@@ -5,59 +5,64 @@
 //  Created by Dhawal Mahajan on 03/10/25.
 //
 
+
 import SwiftUI
 
-struct ReminderListView: View {
+class ReminderListViewModel: ObservableObject {
+    @Published var selectedReminder: Reminder?
+    @Published var showReminderDetail: Bool = false
     
-    let reminders: FetchedResults<Reminder>
-    @State private var selectedReminder: Reminder?
-    @State private var showReminderDetail:Bool = false
-    private func reminderCheckChanged(_ reminder: Reminder, isCompleted: Bool) {
+    func reminderCheckChanged(_ reminder: Reminder, isCompleted: Bool) {
         var editConfig = ReminderEditConfig(reminder: reminder)
         editConfig.isCompleted = isCompleted
         do {
-           _ = try ReminderService.updateReminder(reminder: reminder, editConfig: editConfig)
-        } catch  {
+            _ = try ReminderService.updateReminder(reminder: reminder, editConfig: editConfig)
+        } catch {
             print(error)
         }
-        
     }
-    private func isReminderSelected(_ reminder: Reminder) -> Bool {
-        selectedReminder?.objectID == reminder.objectID
-    }
-    private func deleteReminder(_ indexSet:IndexSet) {
+    
+    func deleteReminder(_ reminders: FetchedResults<Reminder>, at indexSet: IndexSet) {
         indexSet.forEach { index in
             let reminder = reminders[index]
             do {
                 try ReminderService.deleteReminder(reminder)
-            }
-            catch {
+            } catch {
                 print(error)
             }
         }
     }
+    
+    func isReminderSelected(_ reminder: Reminder) -> Bool {
+        selectedReminder?.objectID == reminder.objectID
+    }
+}
+
+struct ReminderListView: View {
+    let reminders: FetchedResults<Reminder>
+    @StateObject private var viewModel = ReminderListViewModel()
     var body: some View {
         VStack {
             List {
                 ForEach(reminders) { reminder in
-                    ReminderCellView(reminder: reminder, isSelected: isReminderSelected(reminder)) { event in
+                    ReminderCellView(reminder: reminder, isSelected: viewModel.isReminderSelected(reminder)) { event in
                         switch event {
                         case .onInfo:
-                            showReminderDetail = true
-                        case .onCheckChange(let reminder,let isCompleted):
-                            reminderCheckChanged(reminder, isCompleted: isCompleted)
+                            viewModel.showReminderDetail = true
+                        case .onCheckChange(let reminder, let isCompleted):
+                            viewModel.reminderCheckChanged(reminder, isCompleted: isCompleted)
                         case .onSelect(let reminder):
-                            selectedReminder = reminder
+                            viewModel.selectedReminder = reminder
                         }
-                        
                     }
-                    
                 }
-                .onDelete(perform: deleteReminder)
+                .onDelete { indexSet in
+                    viewModel.deleteReminder(reminders, at: indexSet)
+                }
             }
         }
-        .sheet(isPresented: $showReminderDetail) {
-            ReminderDetailView(reminder: Binding($selectedReminder)!)
+        .sheet(isPresented: $viewModel.showReminderDetail) {
+            ReminderDetailView(reminder: Binding($viewModel.selectedReminder)!)
         }
     }
 }

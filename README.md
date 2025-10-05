@@ -47,43 +47,6 @@ The app is structured for scalability using **Model–View–ViewModel (MVVM)**:
 
 ---
 
-## 🧩 Project Structure
-ReminderClone/
-├── CoreData/
-│   ├── CoreDataProvider.swift
-│   ├── MyList+CoreDataClass.swift
-│   └── Reminder+CoreDataClass.swift
-│
-├── Models/
-│   ├── ReminderStatsValues.swift
-│   ├── ReminderEditConfig.swift
-│   ├── Userdata.swift
-│
-├── ViewModels/
-│   ├── HomeViewModel.swift
-│   ├── MyListViewModel.swift
-│   ├── MyListDetailViewModel.swift
-│   ├── ReminderListViewModel.swift
-│   ├── ReminderDetailViewModel.swift
-│   └── AddNewListViewModel.swift
-│
-├── Views/
-│   ├── HomeView.swift
-│   ├── MyListView.swift
-│   ├── MyListDetailView.swift
-│   ├── ReminderListView.swift
-│   ├── ReminderDetailView.swift
-│   └── AddNewListView.swift
-│
-├── Services/
-│   ├── ReminderService.swift
-│   └── NotificationManager.swift
-│
-└── Resources/
-└── Assets.xcassets
-
----
-
 ## ⚙️ Requirements
 
 - **Xcode 15+**

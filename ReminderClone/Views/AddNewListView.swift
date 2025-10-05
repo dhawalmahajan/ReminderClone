@@ -7,27 +7,33 @@
 
 import SwiftUI
 
+class AddNewListViewModel: ObservableObject {
+    @Published var name: String = ""
+    @Published var selectedColor: Color = .yellow
+    
+    var isFormValid: Bool {
+        !name.isEmpty
+    }
+}
+
 struct AddNewListView: View {
     @Environment(\.dismiss) private var dismiss
-    @State var name: String = ""
-    @State var selectedColor:Color = .yellow
+    @StateObject private var viewModel = AddNewListViewModel()
     let onSave:(String, UIColor) -> Void
-    private var isFormValid:Bool {
-        return !name.isEmpty
-    }
+    
     var body: some View {
         VStack {
             VStack {
                 Image(systemName: "line.3.horizontal.circle.fill")
-                    .foregroundColor(selectedColor)
+                    .foregroundColor(viewModel.selectedColor)
                     .font(.system(size: 100))
-                TextField("List Name",text: $name)
+                TextField("List Name", text: $viewModel.name)
                     .multilineTextAlignment(.center)
                     .textFieldStyle(.roundedBorder)
             }
             .padding(30)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            ColorPickerView(selectedColor: $selectedColor)
+            ColorPickerView(selectedColor: $viewModel.selectedColor)
             Spacer()
         }.frame(maxWidth:.infinity,maxHeight:.infinity)
             .toolbar {
@@ -45,8 +51,8 @@ struct AddNewListView: View {
                     Button("Done") {
                         dismiss()
                         //save the list
-                        onSave(name, UIColor(selectedColor))
-                    }.disabled(!isFormValid)
+                        onSave(viewModel.name, UIColor(viewModel.selectedColor))
+                    }.disabled(!viewModel.isFormValid)
                         
                 }
             }
